@@ -1,60 +1,63 @@
-#include&lt;stdio.h&gt;
-#include&lt;conio.h&gt;
-void main()
-{
-int i,j,n,v,k,min,u,c[20][20],s[20],d[20];
-clrscr();
-printf(&quot;\n Enter the no. of vertices : &quot;);
-scanf(&quot;%d&quot;,&amp;n);
-printf(&quot;\n Enter the cost adjacency matrix : &quot;);
-printf(&quot;\n Enter 999 for no edge &quot;);
-for(i=1;i&lt;=n;i++)
-{
-for(j=1;j&lt;=n;j++)
-{
-scanf(&quot;%d&quot;,&amp;c[i][j]);
-}
-}
-printf(&quot;\n Enter the source vertex : &quot;);
-scanf(&quot;%d&quot;,&amp;v);
-for(i=1;i&lt;=n;i++)
-{
-s[i]=0;
-d[i]=c[v][i];
-}
-d[v]=0;
-s[v]=1;
-for(k=2;k&lt;=n;k++)
-{
-min=999;
-for(i=1;i&lt;=n;i++)
-{
-if((s[i]==0)&amp;&amp;(d[i]&lt;min))
-{
-min=d[i];
-u=i;
-}
-}
-s[u]=1;
-for(i=1;i&lt;=n;i++)
-{
+#include <stdio.h>
 
-if(s[i]==0)
-{
-if(d[i]&gt;(d[u]+c[u][i]))
-{
-d[i]=d[u]+c[u][i];
-}
-}
+void main() {
+    int i, j, n, v, k, min, u;
+    int c[20][20], s[20], d[20];  
 
-}
-}
-printf(&quot;\n The shortest distance from %d is &quot;,v);
-for(i=1;i&lt;=n;i++)
-{
-printf(&quot;\n %d --&gt; %d = %d &quot;,v,i,d[i]);
-}
-getch();
+    printf("\n Enter the number of vertices: ");
+    scanf("%d", &n);
+    
+    printf("\n Enter the cost adjacency matrix: ");
+    printf("\n Enter 999 for no edge\n");
+
+   
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j <= n; j++) {
+            scanf("%d", &c[i][j]);
+        }
+    }
+
+    printf("\n Enter the source vertex: ");
+    scanf("%d", &v);
+
+   
+    for (i = 1; i <= n; i++) {
+        s[i] = 0;  
+        d[i] = c[v][i];  
+    }
+    d[v] = 0;  
+    s[v] = 1;  
+
+   
+    for (k = 2; k <= n; k++) {
+        min = 999;
+        
+        
+        for (i = 1; i <= n; i++) {
+            if ((s[i] == 0) && (d[i] < min)) {
+                min = d[i];
+                u = i;
+            }
+        }
+        
+     
+        s[u] = 1;
+
+      
+        for (i = 1; i <= n; i++) {
+            if (s[i] == 0) {
+                if (d[i] > (d[u] + c[u][i])) {
+                    d[i] = d[u] + c[u][i];
+                }
+            }
+        }
+    }
+
+   
+    printf("\n The shortest distance from %d is:\n", v);
+    for (i = 1; i <= n; i++) {
+        printf("%d --> %d = %d\n", v, i, d[i]);
+    }
 }
 
 
