@@ -1,46 +1,46 @@
-#include&lt;stdio.h&gt;
-#include&lt;conio.h&gt;
-#include&lt;math.h&gt;
-int x[20],count=1;
-void queens(int,int);
-int place(int,int);
-void main()
-{
-int n,k=1;
-clrscr();
-printf(&quot;\n enter the number of queens to be placed\n&quot;);
-scanf(&quot;%d&quot;,&amp;n);
-queens(k,n);
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int x[20], count = 1;
+
+void queens(int k, int n);
+int place(int k, int j);
+
+int main() {
+    int n;
+    printf("\nEnter the number of queens to be placed: ");
+    scanf("%d", &n);
+    queens(1, n);
+    return 0;
 }
-void queens(int k,int n)
-{
-int i,j;
-for(j=1;j&lt;=n;j++)
-{
-if(place(k,j))
-{
-x[k]=j;
-if(k==n)
-{
-printf(&quot;\n %d solution&quot;,count);
-count++;
-for(i=1;i&lt;=n;i++)
-printf(&quot;\n \t %d row &lt;---&gt; %d
-column&quot;,i,x[i]);
-getch();
+
+void queens(int k, int n) {
+    int j, i;
+    for (j = 1; j <= n; j++) {
+        if (place(k, j)) {
+            x[k] = j; 
+            if (k == n) {  
+                printf("\nSolution %d\n", count++);
+                for (i = 1; i <= n; i++) {
+                    printf("\tRow %d <--- > Column %d\n", i, x[i]);
+                }
+                
+            } else {
+                queens(k + 1, n); 
+            }
+        }
+    }
 }
-else
-queens(k+1,n);
-}
-}
-}
-int place(int k,int j)
-{
-int i;
-for(i=1;i&lt;k;i++)
-if((x[i]==j) || (abs(x[i]-j))==abs(i-k))
-return 0;
-return 1;
+
+int place(int k, int j) {
+    int i;
+    for (i = 1; i < k; i++) {
+        if (x[i] == j || abs(x[i] - j) == abs(i - k)) {
+            return 0; 
+        }
+    }
+    return 1; 
 }
 
 
